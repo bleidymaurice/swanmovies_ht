@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SWAN MOVIES — Cinéma en français</title>
+<style>
+:root{--bg:#090909;--panel:#151515;--gold:#d7b45a;--muted:#b9b4a7;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--white);font-family:Arial,Helvetica,sans-serif}
+header{display:flex;align-items:center;justify-content:space-between;padding:18px 5%;border-bottom:1px solid #29251a;position:sticky;top:0;background:#090909f2;z-index:5}
+.logo{font-weight:900;letter-spacing:1.5px;font-size:22px}.logo span{color:var(--gold)}
+nav{display:flex;gap:18px;flex-wrap:wrap}nav a{color:#eee;text-decoration:none;font-size:14px}
+nav a:hover{color:var(--gold)}
+.hero{padding:58px 5% 50px;background:linear-gradient(90deg,#090909 10%,#17140c 75%,#090909);border-bottom:1px solid #29251a}
+.kicker{color:var(--gold);text-transform:uppercase;letter-spacing:3px;font-size:12px}
+h1{font-size:clamp(36px,7vw,66px);line-height:1.02;margin:12px 0}
+.hero p{max-width:550px;color:var(--muted);line-height:1.6}
+.btn{background:var(--gold);color:#111;border:0;padding:12px 18px;border-radius:5px;font-weight:700;cursor:pointer}
+main{padding:28px 5% 50px}.tools{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 28px}
+input,select{background:#171717;border:1px solid #39342a;color:#fff;padding:12px;border-radius:5px;min-width:180px}
+h2{font-size:22px;margin:28px 0 16px}.gold{color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid #2b281f;border-radius:9px;overflow:hidden}
+.poster{height:190px;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;background:linear-gradient(145deg,#282318,#0e0e0e);color:var(--gold);font-size:24px;font-weight:900}
+.cardbody{padding:12px}.card h3{font-size:15px;margin:0 0 7px}.card p{font-size:12px;color:var(--muted);line-height:1.45;margin:0 0 12px}
+.smallbtn{width:100%;background:transparent;border:1px solid var(--gold);color:var(--gold);padding:9px;border-radius:5px;cursor:pointer}
+.note{margin-top:26px;padding:16px;border:1px solid #3a3322;border-radius:8px;color:var(--muted);font-size:13px;line-height:1.6}
+footer{border-top:1px solid #29251a;padding:22px 5%;color:#999;font-size:12px}
+dialog{background:#111;color:#fff;border:1px solid var(--gold);border-radius:10px;width:min(92%,700px);padding:20px}
+dialog::backdrop{background:#000c}.close{float:right;background:transparent;color:#fff;border:1px solid #555;border-radius:5px;padding:6px 10px}
+video{width:100%;background:#000;margin-top:12px;max-height:55vh}
+@media(max-width:520px){header{align-items:flex-start;gap:12px;flex-direction:column}.hero{padding-top:38px}.poster{height:160px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><span>SWAN</span> MOVIES</div>
+  <nav><a href="#accueil">Accueil</a><a href="#films">Films</a><a href="#series">Séries</a><a href="#nouveautes">Nouveautés</a></nav>
+</header>
+<section class="hero" id="accueil">
+  <div class="kicker">Votre cinéma en français</div>
+  <h1>Le cinéma,<br><span class="gold">à votre façon.</span></h1>
+  <p>Découvrez votre espace cinéma. Recherchez des films et des séries, puis regardez les vidéos que SWAN MOVIES est autorisé à diffuser.</p>
+  <button class="btn" onclick="document.querySelector('#films').scrollIntoView({behavior:'smooth'})">Explorer les films</button>
+</section>
+<main>
+  <h2 id="films">Films <span class="gold">en français</span></h2>
+  <div class="tools">
+    <input id="search" type="search" placeholder="Rechercher un film…" aria-label="Rechercher un film">
+    <select id="category" aria-label="Filtrer par catégorie"><option value="all">Toutes les catégories</option><option>Action</option><option>Comédie</option><option>Drame</option><option>Documentaire</option></select>
+  </div>
+  <div class="grid" id="catalog">
+    <article class="card" data-title="Film à ajouter" data-category="Action">
+      <div class="poster">SWAN<br>MOVIES</div><div class="cardbody"><h3>Votre premier film</h3><p>Ajoutez ici un film que vous avez le droit de diffuser.</p><button class="smallbtn" onclick="openPlayer('Votre premier film')">▶ Regarder</button></div>
+    </article>
+    <article class="card" data-title="Cinéma classique" data-category="Drame">
+      <div class="poster">CINÉMA<br>CLASSIQUE</div><div class="cardbody"><h3>Cinéma classique</h3><p>Emplacement pour une œuvre du domaine public ou autorisée.</p><button class="smallbtn" onclick="openPlayer('Cinéma classique')">▶ Regarder</button></div>
+    </article>
+    <article class="card" data-title="Documentaire" data-category="Documentaire">
+      <div class="poster">DOCU<br>FR</div><div class="cardbody"><h3>Documentaire</h3><p>Présentez ici un documentaire dont la diffusion est autorisée.</p><button class="smallbtn" onclick="openPlayer('Documentaire')">▶ Regarder</button></div>
+    </article>
+    <article class="card" data-title="Comédie" data-category="Comédie">
+      <div class="poster">BONNE<br>HUMEUR</div><div class="cardbody"><h3>Comédie</h3><p>Un emplacement prêt à personnaliser pour votre catalogue.</p><button class="smallbtn" onclick="openPlayer('Comédie')">▶ Regarder</button></div>
+    </article>
+  </div>
+  <h2 id="series">Séries <span class="gold">en français</span></h2>
+  <p style="color:#b9b4a7;line-height:1.6">Cette section pourra accueillir des épisodes que vous possédez ou êtes autorisé à diffuser.</p>
+  <h2 id="nouveautes">Nouveautés</h2>
+  <p style="color:#b9b4a7;line-height:1.6">Ajoutez ici vos dernières publications autorisées.</p>
+  <div class="note"><strong class="gold">À savoir :</strong> ceci est une maquette de départ, pas encore un site publié sur Internet. Les boutons de lecture sont des exemples : pour lire une vidéo, il faudra ajouter un fichier vidéo ou une source de diffusion que vous avez le droit d'utiliser. Ne publiez pas de films protégés sans autorisation.</div>
+</main>
+<footer>© SWAN MOVIES · Maquette de démonstration · Cinéma en français</footer>
+<dialog id="player">
+  <button class="close" onclick="document.querySelector('#player').close()">Fermer ✕</button>
+  <h2 id="playerTitle">Lecture vidéo</h2>
+  <p style="color:#b9b4a7">Ajoutez un fichier vidéo autorisé dans la version publiée du site pour activer la lecture.</p>
+  <video controls><source src="" type="video/mp4"></video>
+</dialog>
+<script>
+const search=document.getElementById('search'), category=document.getElementById('category');
+function filterCards(){const q=search.value.toLowerCase(), c=category.value;document.querySelectorAll('#catalog .card').forEach(card=>{const match=card.dataset.title.toLowerCase().includes(q)||card.innerText.toLowerCase().includes(q);const cat=c==='all'||card.dataset.category===c;card.style.display=match&&cat?'':'none';});}
+search.addEventListener('input',filterCards);category.addEventListener('change',filterCards);
+function openPlayer(title){document.getElementById('playerTitle').textContent=title;document.getElementById('player').showModal();}
+</script>
+</body>
+</html>
